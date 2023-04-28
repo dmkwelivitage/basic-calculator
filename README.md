@@ -5,3 +5,9 @@ NOTE:
   Backspace doesn't work correctly.
   History Doesn't work
   Memory doesn't work.
+
+
+*UPDATED*
+  code can now do multiple caculations.
+  code Works with every button except memory
+  History pane fixed with. *Cannot clear History*
