@@ -27,6 +27,8 @@ public class Controller {
     private String secondNum = "";
     
     private String outputNum = "";
+    
+    private String symbol = "";
 
     @FXML
     void btn0Clicked(ActionEvent event) {
@@ -90,6 +92,8 @@ public class Controller {
         currentNum = "";
         TextField.setText("");
         historyNum.setText("");
+        outputNum = "";
+        
     }
 
     @FXML
@@ -101,96 +105,146 @@ public class Controller {
     @FXML
     void btnDivideClicked(ActionEvent event) {
         calculationprep("/");
-
+        if(outputNum == ""){
+            if(symbol == ""){
+                calculationprep("/");
+                symbol = "+";
+                }
+                else{
+                    calculate();
+                    operatorprep("/");
+                    symbol = "";
+                }
+        }
+        else{
+            calculate();
+            operatorprep("/");
+            symbol = "";
+        }
     }
 
     @FXML
     void btnEqualClicked(ActionEvent event) {
+        calculate();
+    }
+
+    public void calculate(){
         try{
-        int firstNumVal = Integer.parseInt(firstNum);
-        int secondNumVal = Integer.parseInt(currentNum);
-        secondNum = currentNum;
-
-        switch (operator) {
-            case "+" -> {
-                int calculatedNum = firstNumVal + secondNumVal;
-                historyNum.setText(firstNum + " + " + currentNum + " = " + calculatedNum);
-                TextField.setText(String.valueOf(calculatedNum));
-                outputNum = Integer.toString(calculatedNum);
-                updatehistoryfield(outputNum);
-            }
-            case "-" -> {
-                int calculatedNum = firstNumVal - secondNumVal;
-                historyNum.setText(firstNum + " - " + currentNum + " = " + calculatedNum);
-                TextField.setText(String.valueOf(calculatedNum));
-                outputNum = Integer.toString(calculatedNum);
-                updatehistoryfield(outputNum);
-            }
-            case "/" -> {
-                double calculatedNum = firstNumVal / (double)secondNumVal;
-                historyNum.setText(firstNum + " / " + currentNum + " = " + calculatedNum);
-                TextField.setText(String.valueOf(calculatedNum));
-                outputNum = Double.toString(calculatedNum);
-                updatehistoryfield(outputNum);
-            }
-            case "*" -> {
-                int calculatedNum = firstNumVal * secondNumVal;
-                historyNum.setText(firstNum + " * " + currentNum + " = " + calculatedNum);
-                TextField.setText(String.valueOf(calculatedNum));
-                outputNum = Integer.toString(calculatedNum);
-                updatehistoryfield(outputNum);
-            }
-        }
-    }
-    catch(Exception e){
-
-        double firstNumValD = Double.parseDouble(firstNum);
-        double secondNumValD = Double.parseDouble(currentNum);
-        secondNum = currentNum;
-        switch (operator) {
-            case "+" -> {
-                Double calculatedNum = firstNumValD + secondNumValD;
-                historyNum.setText(firstNum + " + " + currentNum + " = " + calculatedNum);
-                TextField.setText(String.valueOf(calculatedNum));
-                outputNum = Double.toString(calculatedNum);
-                updatehistoryfield(outputNum);
-            }
-            case "-" -> {
-                Double calculatedNum = firstNumValD - secondNumValD;
-                historyNum.setText(firstNum + " - " + currentNum + " = " + calculatedNum);
-                TextField.setText(String.valueOf(calculatedNum));
-                outputNum = Double.toString(calculatedNum);
-                updatehistoryfield(outputNum);
-            }
-            case "/" -> {
-                double calculatedNum = firstNumValD / secondNumValD;
-                historyNum.setText(firstNum + " / " + currentNum + " = " + calculatedNum);
-                TextField.setText(String.valueOf(calculatedNum));
-                outputNum = Double.toString(calculatedNum);
-                updatehistoryfield(outputNum);
-            }
-            case "*" -> {
-                Double calculatedNum = firstNumValD * secondNumValD;
-                historyNum.setText(firstNum + " * " + currentNum + " = " + calculatedNum);
-                TextField.setText(String.valueOf(calculatedNum));
-                outputNum = Double.toString(calculatedNum);
-                updatehistoryfield(outputNum);
+            int firstNumVal = Integer.parseInt(firstNum);
+            int secondNumVal = Integer.parseInt(currentNum);
+            secondNum = currentNum;
+    
+            switch (operator) {
+                case "+" -> {
+                    int calculatedNum = firstNumVal + secondNumVal;
+                    historyNum.setText(firstNum + " + " + currentNum + " = " + calculatedNum);
+                    TextField.setText(String.valueOf(calculatedNum));
+                    outputNum = Integer.toString(calculatedNum);
+                    updatehistoryfield(outputNum);
+                }
+                case "-" -> {
+                    int calculatedNum = firstNumVal - secondNumVal;
+                    historyNum.setText(firstNum + " - " + currentNum + " = " + calculatedNum);
+                    TextField.setText(String.valueOf(calculatedNum));
+                    outputNum = Integer.toString(calculatedNum);
+                    updatehistoryfield(outputNum);
+                }
+                case "/" -> {
+                    double calculatedNum = firstNumVal / (double)secondNumVal;
+                    historyNum.setText(firstNum + " / " + currentNum + " = " + calculatedNum);
+                    TextField.setText(String.valueOf(calculatedNum));
+                    outputNum = Double.toString(calculatedNum);
+                    updatehistoryfield(outputNum);
+                }
+                case "*" -> {
+                    int calculatedNum = firstNumVal * secondNumVal;
+                    historyNum.setText(firstNum + " * " + currentNum + " = " + calculatedNum);
+                    TextField.setText(String.valueOf(calculatedNum));
+                    outputNum = Integer.toString(calculatedNum);
+                    updatehistoryfield(outputNum);
+                }
             }
         }
-
-    }
+        catch(Exception e){
+    
+            double firstNumValD = Double.parseDouble(firstNum);
+            double secondNumValD = Double.parseDouble(currentNum);
+            secondNum = currentNum;
+            switch (operator) {
+                case "+" -> {
+                    Double calculatedNum = firstNumValD + secondNumValD;
+                    historyNum.setText(firstNum + " + " + currentNum + " = " + calculatedNum);
+                    TextField.setText(String.valueOf(calculatedNum));
+                    outputNum = Double.toString(calculatedNum);
+                    updatehistoryfield(outputNum);
+                }
+                case "-" -> {
+                    Double calculatedNum = firstNumValD - secondNumValD;
+                    historyNum.setText(firstNum + " - " + currentNum + " = " + calculatedNum);
+                    TextField.setText(String.valueOf(calculatedNum));
+                    outputNum = Double.toString(calculatedNum);
+                    updatehistoryfield(outputNum);
+                }
+                case "/" -> {
+                    double calculatedNum = firstNumValD / secondNumValD;
+                    historyNum.setText(firstNum + " / " + currentNum + " = " + calculatedNum);
+                    TextField.setText(String.valueOf(calculatedNum));
+                    outputNum = Double.toString(calculatedNum);
+                    updatehistoryfield(outputNum);
+                }
+                case "*" -> {
+                    Double calculatedNum = firstNumValD * secondNumValD;
+                    historyNum.setText(firstNum + " * " + currentNum + " = " + calculatedNum);
+                    TextField.setText(String.valueOf(calculatedNum));
+                    outputNum = Double.toString(calculatedNum);
+                    updatehistoryfield(outputNum);
+                }
+            }
+    
+        }
     }
 
     @FXML
     void btnMinusClicked(ActionEvent event) {
         calculationprep("-");
-
+        if(outputNum == ""){
+            if(symbol == ""){
+                calculationprep("-");
+                symbol = "+";
+                }
+                else{
+                    calculate();
+                    operatorprep("-");
+                    symbol = "";
+                }
+        }
+        else{
+            calculate();
+            operatorprep("-");
+            symbol = "";
+        }
+        
     }
 
     @FXML
     void btnMultiplyClicked(ActionEvent event) {
         calculationprep("*");
-
+        if(outputNum == ""){
+            if(symbol == ""){
+                calculationprep("*");
+                symbol = "+";
+                }
+                else{
+                    calculate();
+                    operatorprep("*");
+                    symbol = "";
+                }
+        }
+        else{
+            calculate();
+            operatorprep("*");
+            symbol = "";
+        }
     }
 
     @FXML
@@ -200,8 +254,23 @@ public class Controller {
 
     @FXML
     void btnPlusClicked(ActionEvent event) {
-        calculationprep("+");
-
+        if(outputNum == ""){
+            if(symbol == ""){
+                calculationprep("+");
+                symbol = "+";
+                }
+                else{
+                    calculate();
+                    operatorprep("+");
+                    symbol = "";
+                }
+        }
+        else{
+            calculate();
+            operatorprep("+");
+            symbol = "";
+        }
+        
     }
 
     @FXML
@@ -232,6 +301,13 @@ public class Controller {
     @FXML
     void btnHistoryClicked(ActionEvent event){
         historypopup();
+    }
+
+    public void operatorprep(String operator){
+        this.operator = operator;
+        firstNum = outputNum;
+        currentNum = "";
+        historyNum.setText(firstNum + " " + operator);
     }
 
     public void calculationprep(String operator){
